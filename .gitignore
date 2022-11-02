@@ -2,6 +2,6 @@
 *.DS_Store
 *.classpath
 *.project
-/target/
 /bin/
 *MANIFEST.MF
+/target/
