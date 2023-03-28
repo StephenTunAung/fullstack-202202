@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -37,8 +38,8 @@ public class ClassController {
 	@GetMapping
 	public String index(
 			@RequestParam Optional<String> teacher, 
-			@RequestParam Optional<LocalDate> from, 
-			@RequestParam Optional<LocalDate> to,
+			@DateTimeFormat(pattern = "yyyy-MM-dd") @RequestParam Optional<LocalDate> from, 
+			@DateTimeFormat(pattern = "yyyy-MM-dd") @RequestParam Optional<LocalDate> to,
 			ModelMap model) {
 		
 		var result = clsService.search(teacher, from, to);

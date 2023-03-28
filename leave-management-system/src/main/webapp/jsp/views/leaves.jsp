@@ -25,13 +25,61 @@
 		<!-- Search Form -->
 		<form class="row mb-4">
 			<!-- Date From -->		
+			<div class="col-auto">
+				<label class="form-label">Date From</label>
+				<input type="date" name="from" class="form-control" value="${ param.from }" />
+			</div>
 			
 			<!-- Date To -->	
+			<div class="col-auto">
+				<label class="form-label">Date To</label>
+				<input type="date" name="to" class="form-control" value="${ param.to }" />
+			</div>
 			
 			<!-- Search Button -->
+			<div class="col btn-wrapper">
+				<button class="btn btn-outline-success me-2"><i class="bi bi-search"></i> Search</button>
+			</div>
 		</form>		
 		
 		<!-- Search Result -->
+		
+		<c:choose>
+			
+			<c:when test="${ empty list }">
+				<div class="alert alert-info">There is no data.</div>
+			</c:when>
+			
+			<c:otherwise>
+				
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>Class Info</th>
+							<th>Teacher</th>
+							<th>Apply At</th>
+							<th>Leave start</th>
+							<th>Leaves days</th>
+							<th>Reason</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${list }" var="dto">
+							<tr>
+								<td>${ dto.classInfo } (${ dto.classStart }) </td>
+								<td>${ dto.teacher }</td>
+								<td>${ dto.applyDate }</td>
+								<td>${ dto.startDate }</td>
+								<td>${ dto.days }</td>
+								<td>${ dto.reason }</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			
+			</c:otherwise>
+		
+		</c:choose>
 	
 	</div>
 </body>

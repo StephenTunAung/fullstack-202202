@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.function.Function;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -27,7 +28,7 @@ public class HomeController {
 	private StudentService studentService;
 
 	@GetMapping
-	public String index(@RequestParam Optional<LocalDate> targetDate, ModelMap model) {
+	public String index(@DateTimeFormat(pattern = "yyyy-MM-dd") @RequestParam Optional<LocalDate> targetDate, ModelMap model) {
 		
 		Function<String, Boolean> hasAuthority = authority -> 
 			SecurityContextHolder.getContext().getAuthentication().

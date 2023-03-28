@@ -1,31 +1,19 @@
 package com.jdc.leaves.model.dto.output;
 
 import java.time.LocalDate;
-import java.util.Objects;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class LeaveListVO {
 
-	public LeaveListVO() {
-	}
-
-	public LeaveListVO(LocalDate applyDate, int classId, int studentId, String student, String studentPhone,
-			int teacherId, String teacher, LocalDate startDate, int days, String reason) {
-		super();
-		this.applyDate = applyDate;
-		this.classId = classId;
-		this.studentId = studentId;
-		this.student = student;
-		this.studentPhone = studentPhone;
-		this.teacherId = teacherId;
-		this.teacher = teacher;
-		this.startDate = startDate;
-		this.days = days;
-		this.reason = reason;
-	}
-
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate applyDate;
 
 	private int classId;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate classStart;
+	private String classInfo;
 
 	private int studentId;
 
@@ -37,11 +25,20 @@ public class LeaveListVO {
 
 	private String teacher;
 
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate startDate;
 
 	private int days;
 
 	private String reason;
+
+	public LocalDate getApplyDate() {
+		return applyDate;
+	}
+
+	public void setApplyDate(LocalDate applyDate) {
+		this.applyDate = applyDate;
+	}
 
 	public int getClassId() {
 		return classId;
@@ -51,12 +48,20 @@ public class LeaveListVO {
 		this.classId = classId;
 	}
 
-	public LocalDate getApplyDate() {
-		return applyDate;
+	public LocalDate getClassStart() {
+		return classStart;
 	}
 
-	public void setApplyDate(LocalDate applyDate) {
-		this.applyDate = applyDate;
+	public void setClassStart(LocalDate classStart) {
+		this.classStart = classStart;
+	}
+
+	public String getClassInfo() {
+		return classInfo;
+	}
+
+	public void setClassInfo(String classInfo) {
+		this.classInfo = classInfo;
 	}
 
 	public int getStudentId() {
@@ -121,28 +126,6 @@ public class LeaveListVO {
 
 	public void setReason(String reason) {
 		this.reason = reason;
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(applyDate, classId, days, reason, startDate, student, studentId, studentPhone, teacher,
-				teacherId);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		LeaveListVO other = (LeaveListVO) obj;
-		return Objects.equals(applyDate, other.applyDate) && classId == other.classId && days == other.days
-				&& Objects.equals(reason, other.reason) && Objects.equals(startDate, other.startDate)
-				&& Objects.equals(student, other.student) && studentId == other.studentId
-				&& Objects.equals(studentPhone, other.studentPhone) && Objects.equals(teacher, other.teacher)
-				&& teacherId == other.teacherId;
 	}
 
 }

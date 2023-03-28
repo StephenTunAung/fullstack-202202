@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,6 +22,64 @@
 	<div class="container">
 		
 		<h3 class="my-4">Leave Application</h3>
+		
+		<div class="row">
+			<c:url value="/leaves" var="action"></c:url>
+			<sf:form action="${ action }" modelAttribute="form" cssClass="col-6">
+			
+				<sf:hidden path="classId"/>
+				<sf:hidden path="student"/>
+				<sf:hidden path="applyDate"/>
+				
+				<div class="mb-3">
+					<label class="form-label">Class</label>
+					<span class="form-control">
+						${ classInfo.description } (${ classInfo.startDate })
+					</span>
+				</div>
+				
+				<div class="mb-3">
+					<label class="form-label">Teacher</label>
+					<span class="form-control">
+						${ classInfo.teacherName }
+					</span>
+				</div>
+				
+				<div class="mb-3">
+					<label class="form-label">Student</label>
+					<span class="form-control">
+						${ studentInfo.name }
+					</span>
+				</div>
+				
+				<div class="mb-3 row">
+					<div class="col-8">
+						<label class="form-label">Leave start date</label>
+						<sf:input path="startDate" type="date" cssClass="form-control" />
+						<sf:errors path="startDate" cssClass="text-secondary"></sf:errors>
+					</div>
+					<div class="col">
+						<label class="form-label">Leave days</label>
+						<sf:input path="days" type="number" placeholder="Enter leave days" cssClass="form-control" />
+						<sf:errors path="days" cssClass="text-secondary"></sf:errors>
+					</div>
+				</div>
+				
+				<div class="mb-3">
+					<label class="form-label">Reason</label>
+					<sf:textarea path="reason" placeholder="Enter reason for leaves" cssClass="form-control"/>
+					<sf:errors path="reason" cssClass="text-secondary"></sf:errors>
+				</div>
+				
+				<div>
+					<button class="btn btn-outline-danger">
+						<i class="bi bi-save"></i> Save
+					</button>
+				</div>
+				
+			</sf:form>
+			
+		</div>
 	
 	</div>
 </body>
